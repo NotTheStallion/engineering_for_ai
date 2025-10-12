@@ -22,7 +22,7 @@ def strip(text: str) -> str:
         text = text.split("<|im_end|>")[0]
     return text.strip()
 
-def slm_inference(message: str, max_new_tokens: int = 5000, temperature: float = 0.2, top_p: float = 0.9, device: Literal["cuda", "cpu"] = "cuda") -> str:
+def slm_inference(message: str, max_new_tokens: int = 500, temperature: float = 0.2, top_p: float = 0.9, device: Literal["cuda", "cpu"] = "cuda") -> str:
     system_prompt = "You are a helpful AI assistant made by The Watcher. Answer as concisely as possible. Your name is SmolWatcher."
     prompt = [{"role": "system", "content": system_prompt}, {"role": "user", "content": f"{message}"}]
     input_text = TOKENIZER.apply_chat_template(prompt, tokenize=False)

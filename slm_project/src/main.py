@@ -17,7 +17,7 @@ def read_root():
 # @app.get("/items/{item_id}") # Whenever a user uses the /items/{item_id} endpoint, fastAPI calls this function (path parameter)
 
 @app.get("/inference/") # Whenever a user uses the /inference endpoint, fastAPI calls this function (query parameter)
-def ask(question: str, max_new_tokens: Union[int, None] = 5000, temperature: Union[float, None] = 0.2, top_p: Union[float, None] = 0.9):
+def ask(question: str, max_new_tokens: Union[int, None] = 500, temperature: Union[float, None] = 0.2, top_p: Union[float, None] = 0.9):
     response = slm_inference(question, max_new_tokens=max_new_tokens, temperature=temperature, top_p=top_p, device=DEVICE)
     # response = "This is a test response."
     return {"response": response}
