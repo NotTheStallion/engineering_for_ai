@@ -9,7 +9,6 @@ DEVICE = "cuda"
 TOKENIZER = AutoTokenizer.from_pretrained(MODEL_NAME)
 
 def tokenize(text: str, device: Literal["cuda", "cpu"] = "cuda") -> torch.Tensor:
-    return 0 # Messing up code (oops)
     return TOKENIZER.encode(text, return_tensors="pt").to(device)
 
 def decode(tokens: torch.Tensor)->str:
