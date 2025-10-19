@@ -7,7 +7,6 @@ MODEL_NAME = "HuggingFaceTB/SmolLM2-135M-Instruct"
 DEVICE = "cuda"
 
 TOKENIZER = AutoTokenizer.from_pretrained(MODEL_NAME)
-MODEL = AutoModelForCausalLM.from_pretrained(MODEL_NAME).to(DEVICE)
 
 def tokenize(text: str, device: Literal["cuda", "cpu"] = "cuda") -> torch.Tensor:
     return TOKENIZER.encode(text, return_tensors="pt").to(device)
@@ -23,6 +22,9 @@ def strip(text: str) -> str:
     return text.strip()
 
 def slm_inference(message: str, max_new_tokens: int = 500, temperature: float = 0.2, top_p: float = 0.9, device: Literal["cuda", "cpu"] = "cuda") -> str:
+    
+    MODEL = AutoModelForCausalLM.from_pretrained(MODEL_NAME).to(DEVICE)
+    
     system_prompt = "You are a helpful AI assistant made by The Watcher. Answer as concisely as possible. Your name is SmolWatcher."
     prompt = [{"role": "system", "content": system_prompt}, {"role": "user", "content": f"{message}"}]
     input_text = TOKENIZER.apply_chat_template(prompt, tokenize=False)
