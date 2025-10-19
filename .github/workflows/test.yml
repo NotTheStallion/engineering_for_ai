@@ -24,4 +24,4 @@ jobs:
         - name: Run tests
           run: |
             
-            pytest slm_project/tests/
+            pytest slm_project/test/
