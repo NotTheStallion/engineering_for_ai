@@ -32,6 +32,3 @@ def slm_inference(message: str, max_new_tokens: int = 500, temperature: float = 
     response = strip(response)
     return response
 
-
-def small_change():
-    pass
