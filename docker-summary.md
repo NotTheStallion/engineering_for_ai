@@ -73,3 +73,36 @@ Dockerfile is a text file that contains a set of instructions to build a Docker 
 - EXPOSE : informs Docker that the container listens on the specified network ports at runtime
 - VOLUME : creates a mount point for a volume in the container
 - ARG : defines build-time variables that can be passed during the build process
+
+
+### Details 
+
+
+When you run `docker build -t image-name .`, Docker looks for a file named `Dockerfile` in the current directory (denoted by the dot `.`) to build the image.
+
+It takes the entire directory as the build context execpt for files and directories specified in the `.dockerignore` file.
+
+Given `pwd = /home/you/projects/dir1`, the following Dockerfile will do the following steps :
+
+```
+FROM python:3.9
+
+# 1. Create and set /app as working directory
+WORKDIR /app
+
+# 2. Copy requirements.txt from your dir1 to /app in container
+# From: /home/you/projects/dir1/requirements.txt
+# To:   /app/requirements.txt in container
+COPY requirements.txt .
+
+# 3. Install dependencies (executed in /app)
+RUN pip install -r requirements.txt
+
+# 4. Copy all files from dir1 to /app
+# From: /home/you/projects/dir1/*
+# To:   /app/* in container
+COPY . .
+
+# 5. Default command (executed in /app)
+CMD ["python", "app.py"]
+```

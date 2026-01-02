@@ -8,4 +8,8 @@ run:
 test:
 	pytest test/*.py
 
+docker:
+	sudo docker build -t custom-img . 
+#--no-cache
+
 .PHONY: test
